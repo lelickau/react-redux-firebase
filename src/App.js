@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import {db} from './firebase';
+import { collection, doc, getDocs } from "firebase/firestore";
+
 
 function App() {
+  const [todos, setTodos] = useState([])
+
+  const todosCollectioRef = collection(db, 'todos')
+
+  useEffect(() => {
+    const getTodos = async () => {
+
+      const todosData = await getDocs(todosCollectioRef);
+      console.log(todosData);
+      setTodos(todosData.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    }
+    getTodos()
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {todos.map(todo => <h2 key={todo.id}>{todo.title}</h2>)}
     </div>
   );
 }
