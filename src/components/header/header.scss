@@ -1,0 +1,46 @@
+@import '../../styles/variables.scss';
+
+.header {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.04);
+    z-index: 200;
+    padding-left: 15px;
+
+    &__logo {
+        padding-top: 35px;
+        @extend %title-fonts;
+    }
+
+    &__list {
+        padding-top: 20px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    &__item-title {
+        margin-left: 15px;
+        text-transform: capitalize;
+    }
+
+    &__ico-box {
+        width: 20px;
+    }
+
+    &__line {
+        width: 100%;
+        background-color:$main-bg;
+        height: 2px;
+    }
+
+}

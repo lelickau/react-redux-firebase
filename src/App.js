@@ -1,27 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {db} from './firebase';
-import { collection, doc, getDocs } from "firebase/firestore";
+import TodoItem from './components/todoItem/TodoItem';
+import Header from './components/header/Header';
+import { getDataFromApi } from './hooks/api';
+
 
 
 function App() {
-  const [todos, setTodos] = useState([])
 
-  const todosCollectioRef = collection(db, 'todos')
+  const [todos, setTodos] = useState([])
+  const [lists, setLists] = useState([])
 
   useEffect(() => {
-    const getTodos = async () => {
+    const getData = async () => {
 
-      const todosData = await getDocs(todosCollectioRef);
-      console.log(todosData);
+      const todosData = await getDataFromApi('todos')
+      const listsData = await getDataFromApi('lists')
       setTodos(todosData.docs.map((doc) => ({...doc.data(), id: doc.id})))
+      setLists(listsData.docs.map((doc) => ({...doc.data(), id: doc.id})))
     }
-    getTodos()
+    getData()
   }, [])
 
 
   return (
-    <div className="App">
-      {todos.map(todo => <h2 key={todo.id}>{todo.title}</h2>)}
+    <div className="app">
+    <Header lists={lists}/>
+    <div className="container">
+
+    {todos.map(todo => <TodoItem key={todo.id} title={todo.title} />)}
+
+    </div>
     </div>
   );
 }

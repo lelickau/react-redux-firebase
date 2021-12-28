@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.todo {
+    background: #EBE7EC;
+    @extend %box-style;
+    padding: 18px;
+    margin-bottom: 29px;
+
+    &__title {
+        @extend %title-fonts;
+    }
+}
