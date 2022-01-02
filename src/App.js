@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import TodoItem from './components/todoItem/TodoItem';
 import Header from './components/header/Header';
 import { getDataFromApi } from './hooks/api';
+import { useRoutes } from './routes';
+
+import DBContext from './context/db';
 
 
 
 function App() {
 
+
   const [todos, setTodos] = useState([])
   const [lists, setLists] = useState([])
+
+  const routes = useRoutes()
 
   useEffect(() => {
     const getData = async () => {
@@ -23,14 +28,14 @@ function App() {
 
 
   return (
-    <div className="app">
-    <Header lists={lists}/>
-    <div className="container">
-
-    {todos.map(todo => <TodoItem key={todo.id} title={todo.title} />)}
-
-    </div>
-    </div>
+    <DBContext.Provider value={{todos, lists}}>
+      <div className="app">
+      <Header lists={lists}/>
+      <div className="container">
+        {routes}
+      </div>
+      </div>
+    </DBContext.Provider>
   );
 }
 

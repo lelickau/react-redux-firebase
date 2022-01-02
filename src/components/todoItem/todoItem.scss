@@ -1,12 +1,30 @@
 @import '../../styles/variables.scss';
 
 .todo {
-    background: #EBE7EC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
     @extend %box-style;
     padding: 18px;
-    margin-bottom: 29px;
+    margin-bottom: 10px;
+
+    &__content {
+        display: flex;
+        align-items: center;
+    }
 
     &__title {
+        margin-left: 15px;
         @extend %title-fonts;
+    }
+
+    &__delete {
+        border: none;
+        background-color: $main-bg;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
     }
 }

@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.todo-form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 18px;
+    @extend %box-style;
+
+    &__input {
+        width: 100%;
+        height: 50px;
+        border: none;
+        padding: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        font-weight: 400;
+        border-bottom: 3px solid $accent-color;
+    }
+    &__input::placeholder {
+        font-size: 20px;
+        line-height: 25px;
+        font-weight: 400;
+        color: $placeholder-color;
+    }
+
+    &__btn {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+    }
+}
